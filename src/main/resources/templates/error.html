@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <script th:src="@{/js/jquery.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+    <link rel="stylesheet" th:href="@{/css/cover.css}" />
+    <script th:src="@{/js/popper.js}"></script>
+    <script th:src="@{/js/bootstrap.js}"></script>
+</head>
+<body>
+
+<div th:include="header :: header"></div>
+
+<div class="container">
+
+    <div class="inner cover" style="position: fixed;left: 0;right: 0;top: 30%; margin: auto;text-align: center;">
+        <h1 class="cover-heading" th:text="${exception}" >异常</h1>
+        <p class="lead">
+            <a th:href="@{/article/list}" class="btn btn-lg btn-default">The World!</a>
+        </p>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+<div class="container">
+
+    <div class="fixed-bottom justify-content-center" >
+        <div th:include="footer :: footer">
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+</body>
+</html>

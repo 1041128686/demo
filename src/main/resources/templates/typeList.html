@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>type列表</title>
+    <script th:src="@{/js/jquery.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+    <link rel="stylesheet" th:href="@{/css/cover.css}" />
+    <script th:src="@{/js/popper.js}"></script>
+    <script th:src="@{/js/bootstrap.js}"></script>
+</head>
+<body>
+
+<div th:include="header :: header"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3" style="margin-top: 10px;">
+            <h2>文章分类</h2>
+            <ul class="list-group">
+                <a  th:href="@{/article/list(type=Java)}">
+                    <li class="list-group-item list-group-item-action list-group-item-success" >Java</li>
+                </a>
+
+                <a  th:href="@{/article/list(type=HTML)}">
+                    <li class="list-group-item list-group-item-action list-group-item-success">HTML</li>
+                </a>
+
+                <a  th:href="@{/article/list(type=JavaScript)}">
+                    <li class="list-group-item list-group-item-action list-group-item-success">JavaScript</li>
+                </a>
+                <a  th:href="@{/article/list(type=Spring)}">
+                    <li class="list-group-item list-group-item-action list-group-item-success">Spring全家桶</li>
+                </a>
+                <a  th:href="@{/article/list(type=数据库)}">
+                    <li class="list-group-item list-group-item-action list-group-item-success">数据库</li>
+                </a>
+                <a  th:href="@{/article/list(type=设计模式)}">
+                    <li class="list-group-item list-group-item-action list-group-item-success">设计模式</li>
+                </a>
+                <a  th:href="@{/article/list(type=随笔)}">
+                    <li class="list-group-item list-group-item-action list-group-item-success">随笔</li>
+                </a>
+            </ul>
+        </div>
+
+        <div id="text-list" class=" col-sm-8" style="margin-top: 20px;">
+            <div class="list-group">
+
+                <a  th:each=" article : ${articles}" th:href="@{/article/preview/{id}(id=${article.id})}" class="list-group-item list-group-item-action flex-column align-items-start ">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1" th:text="${article.title}">List group item heading</h5>
+                        <small class="text-muted" th:text="${article.type}">Java</small>
+                    </div>
+                    <p class="mb-1 d-flex  " style="margin-left: 20px" th:text="${article.tip}">tip</p>
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!--<div class="container">-->
+    <!--<ul class="pagination justify-content-center" >-->
+        <!--<li class="page-item"><a class="page-link" th:href="@{/article/list(page=${articles.pageable.pageNumber}-1,type=${type})}">Previous</a></li>-->
+        <!--<li th:each="i:${#numbers.sequence(1,articles.getTotalPages())}" th:if="${articles.getTotalPages()>=1}" class="page-item"><a class="page-link" th:text="${i}" th:href="@{/article/list(page=${i}-1,type=${type})}">1</a></li>-->
+        <!--<li class="page-item"><a class="page-link" th:href="@{/article/list(page=${articles.pageable.pageNumber}+1,type=${type})}" th:if="not ${articles.pageable.getPageNumber()==articles.getTotalPages()-1||articles.getTotalPages()==0}">Next</a></li>-->
+    <!--</ul>-->
+<!--</div>-->
+
+
+
+<div class="container">
+
+    <div class="fixed-bottom justify-content-center" >
+
+        <ul class="pagination justify-content-center" >
+            <li class="page-item"><a class="page-link" th:href="@{/article/list(page=${articles.pageable.pageNumber}-1,type=${type})}">Previous</a></li>
+            <li th:each="i:${#numbers.sequence(1,articles.getTotalPages())}" th:if="${articles.getTotalPages()>=1}" class="page-item"><a class="page-link" th:text="${i}" th:href="@{/article/list(page=${i}-1,type=${type})}">1</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{/article/list(page=${articles.pageable.pageNumber}+1,type=${type})}" th:if="not ${articles.pageable.getPageNumber()==articles.getTotalPages()-1||articles.getTotalPages()==0}">Next</a></li>
+        </ul>
+
+
+        <div th:include="footer :: footer">
+
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+
+<style>
+    #text-list a {
+        margin: 5px;
+    }
+</style>
+</html>

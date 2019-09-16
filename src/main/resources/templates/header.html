@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:fragment="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3" style="margin-top: 10px;">
+                    <h3>MyDestiny</h3>
+                </div>
+                <div class="col-sm-4" style="margin-top: 10px;">
+                    <form class="form-inline" th:action="@{/article/search}">
+                        <input class="form-control" type="text" placeholder="Search" name="content">
+                        <button class="btn btn-success" type="submit">Search</button>
+                    </form>
+                </div>
+                <div class="col-sm-4 offset-1 " >
+                    <nav class="breadcrumb" style="background-color: #333;">
+                        <a class="breadcrumb-item" th:href="@{/home}">Home</a>
+                        <a class="breadcrumb-item" th:href="@{/article/list}">Library</a>
+                        <a class="breadcrumb-item" href="#">Me</a>
+                        <a class="breadcrumb-item" th:href="@{/editor}">Editor</a>
+                        <a class="breadcrumb-item" href="javascript:void (0);" onclick="$('#logout').submit()">Logout</a>
+                        <form id="logout" th:action="@{/logout}" method="post"></form>
+                    </nav>
+                </div>
+            </div>
+    </div>
+</body>
+</html>

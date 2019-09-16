@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>editor</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/js/md/css/editormd.css}" />
+</head>
+<body >
+<form  name="mdform">
+    <div class="container">
+
+        <div class="row " style="margin: 10px">
+            <div class="input-group col-sm-3 offset-1">
+                <input type="hidden" th:value="${article.id}" name="id">
+                <label for="title">标题:</label>
+                <input type="text" class="form-control"  id="title" name="title" th:value="${article.title}">
+            </div>
+            <div class="input-group col-sm-3 offset-1">
+                <label for="tip">摘要:</label>
+                <input type="text" class="form-control"  id="tip" name="tip" th:value="${article.tip}">
+            </div>
+
+            <div class="input-group col-sm-3 offset-1">
+                <label for="type">类型:</label>
+                <input type="text" class="form-control"  id="type" name="type" th:value="${article.type}">
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+    <div id="editor">
+        <textarea class="editormd-markdown-textarea" style="display:none;" name="content"  th:text="${article.content}">### 关于 Editor.md</textarea>
+        <textarea class="editormd-html-textarea" ></textarea>
+    </div>
+</form>
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/md/editormd.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+    $(function() {
+        var editor = editormd("editor", {
+            width  : "90%",
+            height : 640,
+            syncScrolling : "single",
+            saveHTMLToTextarea: true,
+            path   : /*[[@{/js/md/lib/}]]*/,
+
+            toolbarIcons : function() {
+                return ["undo", "redo", "|","bold", "italic","ucwords","uppercase","lowercase","|","h1","h2","h3","h4","h5","h6","|","list-ul","list-ol","table","datetime","hr",  "||",  "watch", "fullscreen", "preview", "releaseIcon", "index"]
+            },
+
+            /*自定义功能按钮，下面我自定义了2个，一个是发布，一个是返回首页*/
+            toolbarIconTexts : {
+                releaseIcon : "<span bgcolor=\"gray\">发布</span>",
+                index : "<span bgcolor=\"red\">返回首页</span>",
+            },
+
+            /*给自定义按钮指定回调函数*/
+            toolbarHandlers:{
+                releaseIcon : function(cm, icon, cursor, selection) {
+                    mdform.method ="post";
+                    mdform.action = "/article/save";
+                    mdform.submit();//提交表单代码在下面
+                    console.log("日志输出 testIcon =>", this, cm, icon, cursor, selection);
+                },
+                index : function(){
+                    window.location.href = 'home';
+                },
+            }
+        });
+    });
+</script>
+</body>
+</html>
