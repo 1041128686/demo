@@ -1,17 +1,10 @@
 package com.my.pojo;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 @Entity
 public class User implements Serializable{
@@ -24,14 +17,18 @@ public class User implements Serializable{
 
     private String username;
 
+    private String phone;
+
     private String role;
 
     public User() {
+
     }
 
-    public User(String password, String username, String role) {
+    public User(String password, String username, String phone, String role) {
         this.password = password;
         this.username = username;
+        this.phone = phone;
         this.role = role;
     }
 
@@ -71,9 +68,17 @@ public class User implements Serializable{
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", password='" + password + '\'' +
+                 '\'' +
                 ", username='" + username + '\'' +
                 ", role='" + role + '\'' +
                 '}';
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
