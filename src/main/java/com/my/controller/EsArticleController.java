@@ -1,8 +1,12 @@
 package com.my.controller;
 
 
+import com.my.pojo.Article;
 import com.my.pojo.EsArticle;
 import com.my.repository.EsArticleRepository;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,7 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 import java.util.Optional;
 
-
+@Api(value = "/article",description = "文章模块")
 @RequestMapping("/article")
 @Controller
 public class EsArticleController {
@@ -24,8 +28,14 @@ public class EsArticleController {
     @Autowired
     private EsArticleRepository esArticleRepository;
 
-    @RequestMapping("/search")
-    public ModelAndView search(String content,@PageableDefault(size = 6,page = 0) Pageable pageable){
+    @ApiOperation(
+            value = "search",
+            notes = "notes",
+            response = ModelAndView.class
+
+    )
+    @RequestMapping(value = "/search",method = RequestMethod.GET)
+    public ModelAndView search(@ApiParam(value = "内容",required = true) String content, @PageableDefault(size = 6,page = 0) Pageable pageable){
         NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
         queryBuilder.withQuery(QueryBuilders.matchQuery("content",content)).withPageable(pageable);
         Page<EsArticle> esArticles = esArticleRepository.search(queryBuilder.build());

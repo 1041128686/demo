@@ -32,7 +32,7 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                    .antMatchers("/css/**","/js/**","/register","/register-page","/sendsms").permitAll()
+                    .antMatchers("/css/**","/js/**","/register","/register-page","/sendsms","/mytest").permitAll()
                     .antMatchers("/editor/**","/editor").hasRole("ADMIN")
                     .antMatchers("/article/list").hasAnyRole("ADMIN","USER")
                     .anyRequest().authenticated()
