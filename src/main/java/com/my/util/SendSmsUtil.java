@@ -26,7 +26,7 @@ public class SendSmsUtil {
 
 
     public static void send(String phone,String code) {
-        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4FuSJs3ERePbXUiXsSLm", "XyPTbhnsOT3wrQzleJPWNsTTTld0qa");
+        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "XXX", "XXX");
         IAcsClient client = new DefaultAcsClient(profile);
         CommonRequest request = new CommonRequest();
         request.setMethod(MethodType.POST);
