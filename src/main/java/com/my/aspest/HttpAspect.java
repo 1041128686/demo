@@ -15,17 +15,17 @@ public class HttpAspect {
 
     private final static Logger logger = LoggerFactory.getLogger(HttpAspect.class);
 
-//    @Before("execution(public * com.my.controller.UserController.*(..))")
-//    public void before(){
-//        logger.info("登录中");
-//        System.out.println("登录中");
-//    }
-//
-//    @After("execution(public * com.my.controller.UserController.*(..))")
-//    public void after(){
-//        logger.info("登录成功");
-//        System.out.println("登录成功");
-//    }
+    @Before("execution(public * com.my.controller.UserController.*(..))")
+    public void before(){
+        logger.info("登录中");
+        System.out.println("登录中");
+    }
+
+    @After("execution(public * com.my.controller.UserController.*(..))")
+    public void after(){
+        logger.info("登录成功");
+        System.out.println("登录成功");
+    }
 
 
 }
